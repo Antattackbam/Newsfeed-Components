@@ -86,6 +86,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Test test test',
+    date: 'Aug 11th, 2020',
+    firstParagraph: 'first',
+    secondParagraph: 'second parapraph is like blah blah',
+    thirdParagraph: 'yeah baby'
   }
 ];
 
@@ -114,3 +121,47 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(article){
+  //create each element needed
+  const articleContainer = document.createElement('div');
+  const articleTitle = document.createElement('h4');
+  const articleDate = document.createElement('h5');
+  const articlePar1 = document.createElement('p');
+  const articlePar2 = document.createElement('p');
+  const articlePar3 = document.createElement('p');
+  const button = document.createElement('span');
+
+  //append the elements to their parent element
+  articleContainer.appendChild(articleTitle);
+  articleContainer.appendChild(articleDate);
+  articleContainer.appendChild(articlePar1);
+  articleContainer.appendChild(articlePar2);
+  articleContainer.appendChild(articlePar3);
+  articleContainer.appendChild(button);
+
+  //adding classes to relating elements
+  articleContainer.classList.add('.article');
+  articleDate.classList.add('.date');
+  button.classList.add(".expandButton");
+
+  //filling article object with appropriate data
+  articleTitle.textContent = article.title;
+  articleDate.textContent = article.date;
+  articlePar1.textContent = article.firstParagraph;
+  articlePar2.textContent = article.secondParagraph;
+  articlePar3.textContent = article.thirdParagraph;
+  button.textContent = "See More";
+
+  button.addEventListener('click', ()=>{
+    articleContainer.classList.toggle('article-open');
+  })
+
+  return articleContainer;
+}
+
+let articles = document.querySelector('.articles');
+
+data.forEach(article =>{
+  articles.appendChild(articleMaker(article));
+});
